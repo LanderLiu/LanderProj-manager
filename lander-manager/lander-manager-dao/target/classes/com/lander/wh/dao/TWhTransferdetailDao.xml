@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.wh.dao.TWhTransferdetailDao" >
+  <resultMap id="BaseResultMap" type="com.lander.wh.pojo.TWhTransferdetail" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fcreatedatetime" property="fcreatedatetime" jdbcType="TIMESTAMP" />
+    <result column="fcreateman" property="fcreateman" jdbcType="VARCHAR" />
+    <result column="flastmodifydatetime" property="flastmodifydatetime" jdbcType="TIMESTAMP" />
+    <result column="flastmodifyman" property="flastmodifyman" jdbcType="VARCHAR" />
+    <result column="fmasterid" property="fmasterid" jdbcType="BIGINT" />
+    <result column="fmaterialid" property="fmaterialid" jdbcType="BIGINT" />
+    <result column="fmaterialname" property="fmaterialname" jdbcType="VARCHAR" />
+    <result column="fmaterialnumber" property="fmaterialnumber" jdbcType="VARCHAR" />
+    <result column="fmaterialspecification" property="fmaterialspecification" jdbcType="VARCHAR" />
+    <result column="fqty" property="fqty" jdbcType="DECIMAL" />
+    <result column="funit" property="funit" jdbcType="VARCHAR" />
+    <result column="fmemo" property="fmemo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      fid, fcreatedatetime, fcreateman, flastmodifydatetime, flastmodifyman, fmasterid, 
+      fmaterialid, fmaterialname, fmaterialnumber, fmaterialspecification, fqty, funit, 
+      fmemo
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lander.wh.pojo.TWhTransferdetailQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_wh_transferdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    fid,fcreatedatetime,fcreateman,flastmodifydatetime,flastmodifyman,fmasterid,fmaterialid,fmaterialname,fmaterialnumber,fmaterialspecification,fqty,funit,fmemo
+    from t_wh_transferdetail
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_wh_transferdetail
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lander.wh.pojo.TWhTransferdetailQuery" >
+    delete from t_wh_transferdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lander.wh.pojo.TWhTransferdetail" >
+    insert into t_wh_transferdetail (fid, fcreatedatetime, fcreateman, 
+      flastmodifydatetime, flastmodifyman, 
+      fmasterid, fmaterialid, fmaterialname, 
+      fmaterialnumber, fmaterialspecification, 
+      fqty, funit, fmemo)
+    values (#{fid,jdbcType=BIGINT}, #{fcreatedatetime,jdbcType=TIMESTAMP}, #{fcreateman,jdbcType=VARCHAR}, 
+      #{flastmodifydatetime,jdbcType=TIMESTAMP}, #{flastmodifyman,jdbcType=VARCHAR}, 
+      #{fmasterid,jdbcType=BIGINT}, #{fmaterialid,jdbcType=BIGINT}, #{fmaterialname,jdbcType=VARCHAR}, 
+      #{fmaterialnumber,jdbcType=VARCHAR}, #{fmaterialspecification,jdbcType=VARCHAR}, 
+      #{fqty,jdbcType=DECIMAL}, #{funit,jdbcType=VARCHAR}, #{fmemo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lander.wh.pojo.TWhTransferdetail" >
+    insert into t_wh_transferdetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime,
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman,
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime,
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman,
+      </if>
+      <if test="fmasterid != null" >
+        fmasterid,
+      </if>
+      <if test="fmaterialid != null" >
+        fmaterialid,
+      </if>
+      <if test="fmaterialname != null" >
+        fmaterialname,
+      </if>
+      <if test="fmaterialnumber != null" >
+        fmaterialnumber,
+      </if>
+      <if test="fmaterialspecification != null" >
+        fmaterialspecification,
+      </if>
+      <if test="fqty != null" >
+        fqty,
+      </if>
+      <if test="funit != null" >
+        funit,
+      </if>
+      <if test="fmemo != null" >
+        fmemo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fcreatedatetime != null" >
+        #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="fmasterid != null" >
+        #{fmasterid,jdbcType=BIGINT},
+      </if>
+      <if test="fmaterialid != null" >
+        #{fmaterialid,jdbcType=BIGINT},
+      </if>
+      <if test="fmaterialname != null" >
+        #{fmaterialname,jdbcType=VARCHAR},
+      </if>
+      <if test="fmaterialnumber != null" >
+        #{fmaterialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fmaterialspecification != null" >
+        #{fmaterialspecification,jdbcType=VARCHAR},
+      </if>
+      <if test="fqty != null" >
+        #{fqty,jdbcType=DECIMAL},
+      </if>
+      <if test="funit != null" >
+        #{funit,jdbcType=VARCHAR},
+      </if>
+      <if test="fmemo != null" >
+        #{fmemo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lander.wh.pojo.TWhTransferdetailQuery" resultType="java.lang.Integer" >
+    select count(*) from t_wh_transferdetail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_wh_transferdetail
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fcreatedatetime != null" >
+        fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreateman != null" >
+        fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flastmodifydatetime != null" >
+        flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flastmodifyman != null" >
+        flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmasterid != null" >
+        fmasterid = #{record.fmasterid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fmaterialid != null" >
+        fmaterialid = #{record.fmaterialid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fmaterialname != null" >
+        fmaterialname = #{record.fmaterialname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmaterialnumber != null" >
+        fmaterialnumber = #{record.fmaterialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmaterialspecification != null" >
+        fmaterialspecification = #{record.fmaterialspecification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fqty != null" >
+        fqty = #{record.fqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.funit != null" >
+        funit = #{record.funit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmemo != null" >
+        fmemo = #{record.fmemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_wh_transferdetail
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      fmasterid = #{record.fmasterid,jdbcType=BIGINT},
+      fmaterialid = #{record.fmaterialid,jdbcType=BIGINT},
+      fmaterialname = #{record.fmaterialname,jdbcType=VARCHAR},
+      fmaterialnumber = #{record.fmaterialnumber,jdbcType=VARCHAR},
+      fmaterialspecification = #{record.fmaterialspecification,jdbcType=VARCHAR},
+      fqty = #{record.fqty,jdbcType=DECIMAL},
+      funit = #{record.funit,jdbcType=VARCHAR},
+      fmemo = #{record.fmemo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lander.wh.pojo.TWhTransferdetail" >
+    update t_wh_transferdetail
+    <set >
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="fmasterid != null" >
+        fmasterid = #{fmasterid,jdbcType=BIGINT},
+      </if>
+      <if test="fmaterialid != null" >
+        fmaterialid = #{fmaterialid,jdbcType=BIGINT},
+      </if>
+      <if test="fmaterialname != null" >
+        fmaterialname = #{fmaterialname,jdbcType=VARCHAR},
+      </if>
+      <if test="fmaterialnumber != null" >
+        fmaterialnumber = #{fmaterialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fmaterialspecification != null" >
+        fmaterialspecification = #{fmaterialspecification,jdbcType=VARCHAR},
+      </if>
+      <if test="fqty != null" >
+        fqty = #{fqty,jdbcType=DECIMAL},
+      </if>
+      <if test="funit != null" >
+        funit = #{funit,jdbcType=VARCHAR},
+      </if>
+      <if test="fmemo != null" >
+        fmemo = #{fmemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lander.wh.pojo.TWhTransferdetail" >
+    update t_wh_transferdetail
+    set fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      fmasterid = #{fmasterid,jdbcType=BIGINT},
+      fmaterialid = #{fmaterialid,jdbcType=BIGINT},
+      fmaterialname = #{fmaterialname,jdbcType=VARCHAR},
+      fmaterialnumber = #{fmaterialnumber,jdbcType=VARCHAR},
+      fmaterialspecification = #{fmaterialspecification,jdbcType=VARCHAR},
+      fqty = #{fqty,jdbcType=DECIMAL},
+      funit = #{funit,jdbcType=VARCHAR},
+      fmemo = #{fmemo,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

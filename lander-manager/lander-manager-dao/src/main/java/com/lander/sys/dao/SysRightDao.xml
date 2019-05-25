@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.sys.dao.SysRightDao" >
+
+   <select id="selectNotInRole" resultType="com.lander.sys.pojo.SysRightDto" parameterType="int" >   
+     SELECT *,(select fcaption from t_sys_controlleraction where fid=a.fparentid) as parentname
+ 	FROM t_sys_controlleraction a
+	where a.fitemtypeid=2 and not a.fid in (select frightid from t_sys_roleright where froleid=#{roleId})  
+  </select>
+</mapper>

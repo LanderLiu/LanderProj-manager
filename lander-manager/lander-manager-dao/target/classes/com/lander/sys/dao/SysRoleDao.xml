@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.sys.dao.SysRoleDao" >
+
+   <select id="selectByState" resultType="com.lander.sys.pojo.SysRoleDto" parameterType="int" >   
+      SELECT *,
+		(Select count(1) from t_sys_roleuser where froleid=t_sys_role.fid) as userCount,
+		(Select count(1) from t_sys_roleright where froleid=t_sys_role.fid) as rightCount
+ 	FROM t_sys_role
+	where fstateId=#{stateId}    
+  </select>
+</mapper>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.sys.dao.TSysUserDao" >
+  <resultMap id="BaseResultMap" type="com.lander.sys.pojo.TSysUser" >
+    <id column="FId" property="fid" jdbcType="INTEGER" />
+    <result column="FNumber" property="fnumber" jdbcType="VARCHAR" />
+    <result column="FName" property="fname" jdbcType="VARCHAR" />
+    <result column="FPhone" property="fphone" jdbcType="VARCHAR" />
+    <result column="FPassword" property="fpassword" jdbcType="VARCHAR" />
+    <result column="FStateId" property="fstateid" jdbcType="INTEGER" />
+    <result column="FCreateDatetime" property="fcreatedatetime" jdbcType="TIMESTAMP" />
+    <result column="FCreateMan" property="fcreateman" jdbcType="VARCHAR" />
+    <result column="FLastModifyDatetime" property="flastmodifydatetime" jdbcType="TIMESTAMP" />
+    <result column="FLastModifyMan" property="flastmodifyman" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      FId, FNumber, FName, FPhone, FPassword, FStateId, FCreateDatetime, FCreateMan, FLastModifyDatetime, 
+      FLastModifyMan
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lander.sys.pojo.TSysUserQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    FId,FNumber,FName,FPhone,FPassword,FStateId,FCreateDatetime,FCreateMan,FLastModifyDatetime,FLastModifyMan
+    from t_sys_user
+    where FId = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_sys_user
+    where FId = #{fid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lander.sys.pojo.TSysUserQuery" >
+    delete from t_sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lander.sys.pojo.TSysUser" >
+    insert into t_sys_user (FId, FNumber, FName, 
+      FPhone, FPassword, FStateId, 
+      FCreateDatetime, FCreateMan, FLastModifyDatetime, 
+      FLastModifyMan)
+    values (#{fid,jdbcType=INTEGER}, #{fnumber,jdbcType=VARCHAR}, #{fname,jdbcType=VARCHAR}, 
+      #{fphone,jdbcType=VARCHAR}, #{fpassword,jdbcType=VARCHAR}, #{fstateid,jdbcType=INTEGER}, 
+      #{fcreatedatetime,jdbcType=TIMESTAMP}, #{fcreateman,jdbcType=VARCHAR}, #{flastmodifydatetime,jdbcType=TIMESTAMP}, 
+      #{flastmodifyman,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lander.sys.pojo.TSysUser" >
+    insert into t_sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FId,
+      </if>
+      <if test="fnumber != null" >
+        FNumber,
+      </if>
+      <if test="fname != null" >
+        FName,
+      </if>
+      <if test="fphone != null" >
+        FPhone,
+      </if>
+      <if test="fpassword != null" >
+        FPassword,
+      </if>
+      <if test="fstateid != null" >
+        FStateId,
+      </if>
+      <if test="fcreatedatetime != null" >
+        FCreateDatetime,
+      </if>
+      <if test="fcreateman != null" >
+        FCreateMan,
+      </if>
+      <if test="flastmodifydatetime != null" >
+        FLastModifyDatetime,
+      </if>
+      <if test="flastmodifyman != null" >
+        FLastModifyMan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fnumber != null" >
+        #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fphone != null" >
+        #{fphone,jdbcType=VARCHAR},
+      </if>
+      <if test="fpassword != null" >
+        #{fpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fstateid != null" >
+        #{fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedatetime != null" >
+        #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lander.sys.pojo.TSysUserQuery" resultType="java.lang.Integer" >
+    select count(*) from t_sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_sys_user
+    <set >
+      <if test="record.fid != null" >
+        FId = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fnumber != null" >
+        FNumber = #{record.fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fname != null" >
+        FName = #{record.fname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fphone != null" >
+        FPhone = #{record.fphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpassword != null" >
+        FPassword = #{record.fpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fstateid != null" >
+        FStateId = #{record.fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcreatedatetime != null" >
+        FCreateDatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreateman != null" >
+        FCreateMan = #{record.fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flastmodifydatetime != null" >
+        FLastModifyDatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flastmodifyman != null" >
+        FLastModifyMan = #{record.flastmodifyman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_sys_user
+    set FId = #{record.fid,jdbcType=INTEGER},
+      FNumber = #{record.fnumber,jdbcType=VARCHAR},
+      FName = #{record.fname,jdbcType=VARCHAR},
+      FPhone = #{record.fphone,jdbcType=VARCHAR},
+      FPassword = #{record.fpassword,jdbcType=VARCHAR},
+      FStateId = #{record.fstateid,jdbcType=INTEGER},
+      FCreateDatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      FCreateMan = #{record.fcreateman,jdbcType=VARCHAR},
+      FLastModifyDatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      FLastModifyMan = #{record.flastmodifyman,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lander.sys.pojo.TSysUser" >
+    update t_sys_user
+    <set >
+      <if test="fnumber != null" >
+        FNumber = #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null" >
+        FName = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fphone != null" >
+        FPhone = #{fphone,jdbcType=VARCHAR},
+      </if>
+      <if test="fpassword != null" >
+        FPassword = #{fpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fstateid != null" >
+        FStateId = #{fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedatetime != null" >
+        FCreateDatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        FCreateMan = #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        FLastModifyDatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        FLastModifyMan = #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FId = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lander.sys.pojo.TSysUser" >
+    update t_sys_user
+    set FNumber = #{fnumber,jdbcType=VARCHAR},
+      FName = #{fname,jdbcType=VARCHAR},
+      FPhone = #{fphone,jdbcType=VARCHAR},
+      FPassword = #{fpassword,jdbcType=VARCHAR},
+      FStateId = #{fstateid,jdbcType=INTEGER},
+      FCreateDatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      FCreateMan = #{fcreateman,jdbcType=VARCHAR},
+      FLastModifyDatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      FLastModifyMan = #{flastmodifyman,jdbcType=VARCHAR}
+    where FId = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>
