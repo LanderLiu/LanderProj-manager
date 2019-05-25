@@ -9,9 +9,7 @@ public class SysException extends Exception {
     private String code;
     /**错误描述*/
     private String msg;
-    
-    
-    
+        
     public SysException() {
         super();
     }
