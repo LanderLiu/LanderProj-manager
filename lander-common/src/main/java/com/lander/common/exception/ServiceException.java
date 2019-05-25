@@ -11,6 +11,7 @@ public class ServiceException extends RuntimeException {
 	/**外部错误码*/
 	private String logMsg;
 	
+	
 	public ServiceException() {
 		super();
 	}
