@@ -11,6 +11,7 @@ public class SysException extends Exception {
     private String msg;
     
     
+    
     public SysException() {
         super();
     }
