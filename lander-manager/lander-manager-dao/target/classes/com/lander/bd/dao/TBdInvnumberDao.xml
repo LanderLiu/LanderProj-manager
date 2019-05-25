@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.bd.dao.TBdInvnumberDao" >
+  <resultMap id="BaseResultMap" type="com.lander.bd.pojo.TBdInvnumber" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fcreateman" property="fcreateman" jdbcType="VARCHAR" />
+    <result column="fcreatedatetime" property="fcreatedatetime" jdbcType="DATE" />
+    <result column="flastmodifyman" property="flastmodifyman" jdbcType="VARCHAR" />
+    <result column="flastmodifydatetime" property="flastmodifydatetime" jdbcType="DATE" />
+    <result column="fcategoryid" property="fcategoryid" jdbcType="INTEGER" />
+    <result column="fleaderstr" property="fleaderstr" jdbcType="VARCHAR" />
+    <result column="fflow" property="fflow" jdbcType="INTEGER" />
+    <result column="fdescript" property="fdescript" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      fid, fcreateman, fcreatedatetime, flastmodifyman, flastmodifydatetime, fcategoryid, 
+      fleaderstr, fflow, fdescript
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lander.bd.pojo.TBdInvnumberQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_bd_invnumber
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    fid,fcreateman,fcreatedatetime,flastmodifyman,flastmodifydatetime,fcategoryid,fleaderstr,fflow,fdescript
+    from t_bd_invnumber
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_bd_invnumber
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lander.bd.pojo.TBdInvnumberQuery" >
+    delete from t_bd_invnumber
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lander.bd.pojo.TBdInvnumber" >
+    insert into t_bd_invnumber (fid, fcreateman, fcreatedatetime, 
+      flastmodifyman, flastmodifydatetime, fcategoryid, 
+      fleaderstr, fflow, fdescript
+      )
+    values (#{fid,jdbcType=BIGINT}, #{fcreateman,jdbcType=VARCHAR}, #{fcreatedatetime,jdbcType=DATE}, 
+      #{flastmodifyman,jdbcType=VARCHAR}, #{flastmodifydatetime,jdbcType=DATE}, #{fcategoryid,jdbcType=INTEGER}, 
+      #{fleaderstr,jdbcType=VARCHAR}, #{fflow,jdbcType=INTEGER}, #{fdescript,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lander.bd.pojo.TBdInvnumber" >
+    insert into t_bd_invnumber
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman,
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime,
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman,
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime,
+      </if>
+      <if test="fcategoryid != null" >
+        fcategoryid,
+      </if>
+      <if test="fleaderstr != null" >
+        fleaderstr,
+      </if>
+      <if test="fflow != null" >
+        fflow,
+      </if>
+      <if test="fdescript != null" >
+        fdescript,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fcreateman != null" >
+        #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreatedatetime != null" >
+        #{fcreatedatetime,jdbcType=DATE},
+      </if>
+      <if test="flastmodifyman != null" >
+        #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        #{flastmodifydatetime,jdbcType=DATE},
+      </if>
+      <if test="fcategoryid != null" >
+        #{fcategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="fleaderstr != null" >
+        #{fleaderstr,jdbcType=VARCHAR},
+      </if>
+      <if test="fflow != null" >
+        #{fflow,jdbcType=INTEGER},
+      </if>
+      <if test="fdescript != null" >
+        #{fdescript,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lander.bd.pojo.TBdInvnumberQuery" resultType="java.lang.Integer" >
+    select count(*) from t_bd_invnumber
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_bd_invnumber
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fcreateman != null" >
+        fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcreatedatetime != null" >
+        fcreatedatetime = #{record.fcreatedatetime,jdbcType=DATE},
+      </if>
+      <if test="record.flastmodifyman != null" >
+        flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flastmodifydatetime != null" >
+        flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=DATE},
+      </if>
+      <if test="record.fcategoryid != null" >
+        fcategoryid = #{record.fcategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fleaderstr != null" >
+        fleaderstr = #{record.fleaderstr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fflow != null" >
+        fflow = #{record.fflow,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdescript != null" >
+        fdescript = #{record.fdescript,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_bd_invnumber
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      fcreatedatetime = #{record.fcreatedatetime,jdbcType=DATE},
+      flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=DATE},
+      fcategoryid = #{record.fcategoryid,jdbcType=INTEGER},
+      fleaderstr = #{record.fleaderstr,jdbcType=VARCHAR},
+      fflow = #{record.fflow,jdbcType=INTEGER},
+      fdescript = #{record.fdescript,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lander.bd.pojo.TBdInvnumber" >
+    update t_bd_invnumber
+    <set >
+      <if test="fcreateman != null" >
+        fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime = #{fcreatedatetime,jdbcType=DATE},
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime = #{flastmodifydatetime,jdbcType=DATE},
+      </if>
+      <if test="fcategoryid != null" >
+        fcategoryid = #{fcategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="fleaderstr != null" >
+        fleaderstr = #{fleaderstr,jdbcType=VARCHAR},
+      </if>
+      <if test="fflow != null" >
+        fflow = #{fflow,jdbcType=INTEGER},
+      </if>
+      <if test="fdescript != null" >
+        fdescript = #{fdescript,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lander.bd.pojo.TBdInvnumber" >
+    update t_bd_invnumber
+    set fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      fcreatedatetime = #{fcreatedatetime,jdbcType=DATE},
+      flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{flastmodifydatetime,jdbcType=DATE},
+      fcategoryid = #{fcategoryid,jdbcType=INTEGER},
+      fleaderstr = #{fleaderstr,jdbcType=VARCHAR},
+      fflow = #{fflow,jdbcType=INTEGER},
+      fdescript = #{fdescript,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

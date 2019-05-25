@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.wh.dao.TWhTransferoutDao" >
+  <resultMap id="BaseResultMap" type="com.lander.wh.pojo.TWhTransferout" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fcreatedatetime" property="fcreatedatetime" jdbcType="TIMESTAMP" />
+    <result column="fcreateman" property="fcreateman" jdbcType="VARCHAR" />
+    <result column="flastmodifydatetime" property="flastmodifydatetime" jdbcType="TIMESTAMP" />
+    <result column="flastmodifyman" property="flastmodifyman" jdbcType="VARCHAR" />
+    <result column="fbizdate" property="fbizdate" jdbcType="TIMESTAMP" />
+    <result column="fnumber" property="fnumber" jdbcType="VARCHAR" />
+    <result column="fwarehouseid" property="fwarehouseid" jdbcType="BIGINT" />
+    <result column="fwarehousename" property="fwarehousename" jdbcType="VARCHAR" />
+    <result column="fmemo" property="fmemo" jdbcType="VARCHAR" />
+    <result column="fstateid" property="fstateid" jdbcType="INTEGER" />
+    <result column="fauditmemo" property="fauditmemo" jdbcType="VARCHAR" />
+    <result column="fauditman" property="fauditman" jdbcType="VARCHAR" />
+    <result column="fauditdatetime" property="fauditdatetime" jdbcType="TIMESTAMP" />
+    <result column="fitemcount" property="fitemcount" jdbcType="INTEGER" />
+    <result column="fsourcetypeid" property="fsourcetypeid" jdbcType="INTEGER" />
+    <result column="ftransferid" property="ftransferid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      fid, fcreatedatetime, fcreateman, flastmodifydatetime, flastmodifyman, fbizdate, 
+      fnumber, fwarehouseid, fwarehousename, fmemo, fstateid, fauditmemo, fauditman, fauditdatetime, 
+      fitemcount, fsourcetypeid, ftransferid
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lander.wh.pojo.TWhTransferoutQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_wh_transferout
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    fid,fcreatedatetime,fcreateman,flastmodifydatetime,flastmodifyman,fbizdate,fnumber,fwarehouseid,fwarehousename,fmemo,fstateid,fauditmemo,fauditman,fauditdatetime,fitemcount,fsourcetypeid,ftransferid
+    from t_wh_transferout
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_wh_transferout
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lander.wh.pojo.TWhTransferoutQuery" >
+    delete from t_wh_transferout
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lander.wh.pojo.TWhTransferout" >
+    insert into t_wh_transferout (fid, fcreatedatetime, fcreateman, 
+      flastmodifydatetime, flastmodifyman, 
+      fbizdate, fnumber, fwarehouseid, 
+      fwarehousename, fmemo, fstateid, 
+      fauditmemo, fauditman, fauditdatetime, 
+      fitemcount, fsourcetypeid, ftransferid
+      )
+    values (#{fid,jdbcType=BIGINT}, #{fcreatedatetime,jdbcType=TIMESTAMP}, #{fcreateman,jdbcType=VARCHAR}, 
+      #{flastmodifydatetime,jdbcType=TIMESTAMP}, #{flastmodifyman,jdbcType=VARCHAR}, 
+      #{fbizdate,jdbcType=TIMESTAMP}, #{fnumber,jdbcType=VARCHAR}, #{fwarehouseid,jdbcType=BIGINT}, 
+      #{fwarehousename,jdbcType=VARCHAR}, #{fmemo,jdbcType=VARCHAR}, #{fstateid,jdbcType=INTEGER}, 
+      #{fauditmemo,jdbcType=VARCHAR}, #{fauditman,jdbcType=VARCHAR}, #{fauditdatetime,jdbcType=TIMESTAMP}, 
+      #{fitemcount,jdbcType=INTEGER}, #{fsourcetypeid,jdbcType=INTEGER}, #{ftransferid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lander.wh.pojo.TWhTransferout" >
+    insert into t_wh_transferout
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime,
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman,
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime,
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman,
+      </if>
+      <if test="fbizdate != null" >
+        fbizdate,
+      </if>
+      <if test="fnumber != null" >
+        fnumber,
+      </if>
+      <if test="fwarehouseid != null" >
+        fwarehouseid,
+      </if>
+      <if test="fwarehousename != null" >
+        fwarehousename,
+      </if>
+      <if test="fmemo != null" >
+        fmemo,
+      </if>
+      <if test="fstateid != null" >
+        fstateid,
+      </if>
+      <if test="fauditmemo != null" >
+        fauditmemo,
+      </if>
+      <if test="fauditman != null" >
+        fauditman,
+      </if>
+      <if test="fauditdatetime != null" >
+        fauditdatetime,
+      </if>
+      <if test="fitemcount != null" >
+        fitemcount,
+      </if>
+      <if test="fsourcetypeid != null" >
+        fsourcetypeid,
+      </if>
+      <if test="ftransferid != null" >
+        ftransferid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fcreatedatetime != null" >
+        #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="fbizdate != null" >
+        #{fbizdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fnumber != null" >
+        #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fwarehouseid != null" >
+        #{fwarehouseid,jdbcType=BIGINT},
+      </if>
+      <if test="fwarehousename != null" >
+        #{fwarehousename,jdbcType=VARCHAR},
+      </if>
+      <if test="fmemo != null" >
+        #{fmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="fstateid != null" >
+        #{fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="fauditmemo != null" >
+        #{fauditmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditman != null" >
+        #{fauditman,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditdatetime != null" >
+        #{fauditdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fitemcount != null" >
+        #{fitemcount,jdbcType=INTEGER},
+      </if>
+      <if test="fsourcetypeid != null" >
+        #{fsourcetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="ftransferid != null" >
+        #{ftransferid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lander.wh.pojo.TWhTransferoutQuery" resultType="java.lang.Integer" >
+    select count(*) from t_wh_transferout
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_wh_transferout
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fcreatedatetime != null" >
+        fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreateman != null" >
+        fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flastmodifydatetime != null" >
+        flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flastmodifyman != null" >
+        flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fbizdate != null" >
+        fbizdate = #{record.fbizdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fnumber != null" >
+        fnumber = #{record.fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fwarehouseid != null" >
+        fwarehouseid = #{record.fwarehouseid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fwarehousename != null" >
+        fwarehousename = #{record.fwarehousename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmemo != null" >
+        fmemo = #{record.fmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fstateid != null" >
+        fstateid = #{record.fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fauditmemo != null" >
+        fauditmemo = #{record.fauditmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fauditman != null" >
+        fauditman = #{record.fauditman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fauditdatetime != null" >
+        fauditdatetime = #{record.fauditdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fitemcount != null" >
+        fitemcount = #{record.fitemcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsourcetypeid != null" >
+        fsourcetypeid = #{record.fsourcetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftransferid != null" >
+        ftransferid = #{record.ftransferid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_wh_transferout
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      fbizdate = #{record.fbizdate,jdbcType=TIMESTAMP},
+      fnumber = #{record.fnumber,jdbcType=VARCHAR},
+      fwarehouseid = #{record.fwarehouseid,jdbcType=BIGINT},
+      fwarehousename = #{record.fwarehousename,jdbcType=VARCHAR},
+      fmemo = #{record.fmemo,jdbcType=VARCHAR},
+      fstateid = #{record.fstateid,jdbcType=INTEGER},
+      fauditmemo = #{record.fauditmemo,jdbcType=VARCHAR},
+      fauditman = #{record.fauditman,jdbcType=VARCHAR},
+      fauditdatetime = #{record.fauditdatetime,jdbcType=TIMESTAMP},
+      fitemcount = #{record.fitemcount,jdbcType=INTEGER},
+      fsourcetypeid = #{record.fsourcetypeid,jdbcType=INTEGER},
+      ftransferid = #{record.ftransferid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lander.wh.pojo.TWhTransferout" >
+    update t_wh_transferout
+    <set >
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="fbizdate != null" >
+        fbizdate = #{fbizdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fnumber != null" >
+        fnumber = #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fwarehouseid != null" >
+        fwarehouseid = #{fwarehouseid,jdbcType=BIGINT},
+      </if>
+      <if test="fwarehousename != null" >
+        fwarehousename = #{fwarehousename,jdbcType=VARCHAR},
+      </if>
+      <if test="fmemo != null" >
+        fmemo = #{fmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="fstateid != null" >
+        fstateid = #{fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="fauditmemo != null" >
+        fauditmemo = #{fauditmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditman != null" >
+        fauditman = #{fauditman,jdbcType=VARCHAR},
+      </if>
+      <if test="fauditdatetime != null" >
+        fauditdatetime = #{fauditdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fitemcount != null" >
+        fitemcount = #{fitemcount,jdbcType=INTEGER},
+      </if>
+      <if test="fsourcetypeid != null" >
+        fsourcetypeid = #{fsourcetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="ftransferid != null" >
+        ftransferid = #{ftransferid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lander.wh.pojo.TWhTransferout" >
+    update t_wh_transferout
+    set fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      fbizdate = #{fbizdate,jdbcType=TIMESTAMP},
+      fnumber = #{fnumber,jdbcType=VARCHAR},
+      fwarehouseid = #{fwarehouseid,jdbcType=BIGINT},
+      fwarehousename = #{fwarehousename,jdbcType=VARCHAR},
+      fmemo = #{fmemo,jdbcType=VARCHAR},
+      fstateid = #{fstateid,jdbcType=INTEGER},
+      fauditmemo = #{fauditmemo,jdbcType=VARCHAR},
+      fauditman = #{fauditman,jdbcType=VARCHAR},
+      fauditdatetime = #{fauditdatetime,jdbcType=TIMESTAMP},
+      fitemcount = #{fitemcount,jdbcType=INTEGER},
+      fsourcetypeid = #{fsourcetypeid,jdbcType=INTEGER},
+      ftransferid = #{ftransferid,jdbcType=BIGINT}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

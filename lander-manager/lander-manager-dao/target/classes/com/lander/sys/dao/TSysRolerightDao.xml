@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.sys.dao.TSysRolerightDao" >
+  <resultMap id="BaseResultMap" type="com.lander.sys.pojo.TSysRoleright" >
+    <id column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="froleid" property="froleid" jdbcType="INTEGER" />
+    <result column="frightid" property="frightid" jdbcType="INTEGER" />
+    <result column="fcreatedatetime" property="fcreatedatetime" jdbcType="TIMESTAMP" />
+    <result column="fcreateman" property="fcreateman" jdbcType="VARCHAR" />
+    <result column="flastmodifydatetime" property="flastmodifydatetime" jdbcType="TIMESTAMP" />
+    <result column="flastmodifyman" property="flastmodifyman" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      fid, froleid, frightid, fcreatedatetime, fcreateman, flastmodifydatetime, flastmodifyman
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lander.sys.pojo.TSysRolerightQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sys_roleright
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    fid,froleid,frightid,fcreatedatetime,fcreateman,flastmodifydatetime,flastmodifyman
+    from t_sys_roleright
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_sys_roleright
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lander.sys.pojo.TSysRolerightQuery" >
+    delete from t_sys_roleright
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lander.sys.pojo.TSysRoleright" >
+    insert into t_sys_roleright (fid, froleid, frightid, 
+      fcreatedatetime, fcreateman, flastmodifydatetime, 
+      flastmodifyman)
+    values (#{fid,jdbcType=INTEGER}, #{froleid,jdbcType=INTEGER}, #{frightid,jdbcType=INTEGER}, 
+      #{fcreatedatetime,jdbcType=TIMESTAMP}, #{fcreateman,jdbcType=VARCHAR}, #{flastmodifydatetime,jdbcType=TIMESTAMP}, 
+      #{flastmodifyman,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lander.sys.pojo.TSysRoleright" >
+    insert into t_sys_roleright
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="froleid != null" >
+        froleid,
+      </if>
+      <if test="frightid != null" >
+        frightid,
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime,
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman,
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime,
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="froleid != null" >
+        #{froleid,jdbcType=INTEGER},
+      </if>
+      <if test="frightid != null" >
+        #{frightid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedatetime != null" >
+        #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lander.sys.pojo.TSysRolerightQuery" resultType="java.lang.Integer" >
+    select count(*) from t_sys_roleright
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_sys_roleright
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.froleid != null" >
+        froleid = #{record.froleid,jdbcType=INTEGER},
+      </if>
+      <if test="record.frightid != null" >
+        frightid = #{record.frightid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcreatedatetime != null" >
+        fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreateman != null" >
+        fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flastmodifydatetime != null" >
+        flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flastmodifyman != null" >
+        flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_sys_roleright
+    set fid = #{record.fid,jdbcType=INTEGER},
+      froleid = #{record.froleid,jdbcType=INTEGER},
+      frightid = #{record.frightid,jdbcType=INTEGER},
+      fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lander.sys.pojo.TSysRoleright" >
+    update t_sys_roleright
+    <set >
+      <if test="froleid != null" >
+        froleid = #{froleid,jdbcType=INTEGER},
+      </if>
+      <if test="frightid != null" >
+        frightid = #{frightid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lander.sys.pojo.TSysRoleright" >
+    update t_sys_roleright
+    set froleid = #{froleid,jdbcType=INTEGER},
+      frightid = #{frightid,jdbcType=INTEGER},
+      fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

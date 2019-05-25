@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.bd.dao.BdWarehouseDao" >
+
+   <select id="selectLike" resultType="com.lander.bd.pojo.TBdWarehouse" parameterType="string" >   
+    SELECT *
+ 	FROM t_bd_warehouse
+	WHERE fnumber like #{q} or fname like  #{q} limit 10  
+  </select>
+</mapper>

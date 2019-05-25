@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.bd.dao.TBdDeptDao" >
+  <resultMap id="BaseResultMap" type="com.lander.bd.pojo.TBdDept" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fparentid" property="fparentid" jdbcType="BIGINT" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+    <result column="fstateid" property="fstateid" jdbcType="INTEGER" />
+    <result column="forder" property="forder" jdbcType="INTEGER" />
+    <result column="fisparent" property="fisparent" jdbcType="BIT" />
+    <result column="fcreatedatetime" property="fcreatedatetime" jdbcType="TIMESTAMP" />
+    <result column="fcreateman" property="fcreateman" jdbcType="VARCHAR" />
+    <result column="flastmodifydatetime" property="flastmodifydatetime" jdbcType="TIMESTAMP" />
+    <result column="flastmodifyman" property="flastmodifyman" jdbcType="VARCHAR" />
+    <result column="ffullname" property="ffullname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      fid, fparentid, fname, fstateid, forder, fisparent, fcreatedatetime, fcreateman, 
+      flastmodifydatetime, flastmodifyman, ffullname
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lander.bd.pojo.TBdDeptQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_bd_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    fid,fparentid,fname,fstateid,forder,fisparent,fcreatedatetime,fcreateman,flastmodifydatetime,flastmodifyman,ffullname
+    from t_bd_dept
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_bd_dept
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lander.bd.pojo.TBdDeptQuery" >
+    delete from t_bd_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lander.bd.pojo.TBdDept" >
+    insert into t_bd_dept (fid, fparentid, fname, 
+      fstateid, forder, fisparent, 
+      fcreatedatetime, fcreateman, flastmodifydatetime, 
+      flastmodifyman, ffullname)
+    values (#{fid,jdbcType=BIGINT}, #{fparentid,jdbcType=BIGINT}, #{fname,jdbcType=VARCHAR}, 
+      #{fstateid,jdbcType=INTEGER}, #{forder,jdbcType=INTEGER}, #{fisparent,jdbcType=BIT}, 
+      #{fcreatedatetime,jdbcType=TIMESTAMP}, #{fcreateman,jdbcType=VARCHAR}, #{flastmodifydatetime,jdbcType=TIMESTAMP}, 
+      #{flastmodifyman,jdbcType=VARCHAR}, #{ffullname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lander.bd.pojo.TBdDept" >
+    insert into t_bd_dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fparentid != null" >
+        fparentid,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+      <if test="fstateid != null" >
+        fstateid,
+      </if>
+      <if test="forder != null" >
+        forder,
+      </if>
+      <if test="fisparent != null" >
+        fisparent,
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime,
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman,
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime,
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman,
+      </if>
+      <if test="ffullname != null" >
+        ffullname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fparentid != null" >
+        #{fparentid,jdbcType=BIGINT},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fstateid != null" >
+        #{fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="forder != null" >
+        #{forder,jdbcType=INTEGER},
+      </if>
+      <if test="fisparent != null" >
+        #{fisparent,jdbcType=BIT},
+      </if>
+      <if test="fcreatedatetime != null" >
+        #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="ffullname != null" >
+        #{ffullname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lander.bd.pojo.TBdDeptQuery" resultType="java.lang.Integer" >
+    select count(*) from t_bd_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_bd_dept
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fparentid != null" >
+        fparentid = #{record.fparentid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fname != null" >
+        fname = #{record.fname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fstateid != null" >
+        fstateid = #{record.fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="record.forder != null" >
+        forder = #{record.forder,jdbcType=INTEGER},
+      </if>
+      <if test="record.fisparent != null" >
+        fisparent = #{record.fisparent,jdbcType=BIT},
+      </if>
+      <if test="record.fcreatedatetime != null" >
+        fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreateman != null" >
+        fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flastmodifydatetime != null" >
+        flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flastmodifyman != null" >
+        flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ffullname != null" >
+        ffullname = #{record.ffullname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_bd_dept
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fparentid = #{record.fparentid,jdbcType=BIGINT},
+      fname = #{record.fname,jdbcType=VARCHAR},
+      fstateid = #{record.fstateid,jdbcType=INTEGER},
+      forder = #{record.forder,jdbcType=INTEGER},
+      fisparent = #{record.fisparent,jdbcType=BIT},
+      fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      ffullname = #{record.ffullname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lander.bd.pojo.TBdDept" >
+    update t_bd_dept
+    <set >
+      <if test="fparentid != null" >
+        fparentid = #{fparentid,jdbcType=BIGINT},
+      </if>
+      <if test="fname != null" >
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fstateid != null" >
+        fstateid = #{fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="forder != null" >
+        forder = #{forder,jdbcType=INTEGER},
+      </if>
+      <if test="fisparent != null" >
+        fisparent = #{fisparent,jdbcType=BIT},
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="ffullname != null" >
+        ffullname = #{ffullname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lander.bd.pojo.TBdDept" >
+    update t_bd_dept
+    set fparentid = #{fparentid,jdbcType=BIGINT},
+      fname = #{fname,jdbcType=VARCHAR},
+      fstateid = #{fstateid,jdbcType=INTEGER},
+      forder = #{forder,jdbcType=INTEGER},
+      fisparent = #{fisparent,jdbcType=BIT},
+      fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      ffullname = #{ffullname,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+	
+	<!-- 配置包扫描器，扫描所有带@Service注解的类 -->
+	<context:component-scan base-package="com.lander.manager.sys.service,com.lander.manager.bd.service,com.lander.manager.pr.service,com.lander.manager.wh.service,com.lander.manager.common,com.lander.manager.rpt,com.lander.manager.sale" use-default-filters="true">
+		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> -->
+	</context:component-scan>
+
+	<!-- 发布dubbo服务 -->
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="lander-manager" />
+	
+	<!-- 注册中心的地址 -->
+	<dubbo:registry protocol="zookeeper" address="192.168.10.155:2181" />
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20880" />
+	<!-- 声明需要暴露的服务接口 -->
+	
+ 	<dubbo:service interface="com.lander.manager.sys.service.ControllerActionService" ref="controllerActionServiceImpl" timeout="300000"/> 
+ 	<dubbo:service interface="com.lander.manager.sys.service.SysRoleService" ref="sysRoleServiceImpl" timeout="300000"/> 
+ 	<dubbo:service interface="com.lander.manager.sys.service.SysUserService" ref="sysUserServiceImpl" timeout="300000"/> 
+ 	<dubbo:service interface="com.lander.manager.sys.service.SysRoleuserService" ref="sysRoleuserServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.sys.service.SysRolerightService" ref="sysRolerightServiceImpl" timeout="300000"/>
+ 	
+ 	<dubbo:service interface="com.lander.manager.bd.service.BdSupplyService" ref="bdSupplyServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.bd.service.BdWarehouseService" ref="bdWarehouseServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.bd.service.BdDeptService" ref="bdDeptServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.bd.service.BdMaterialcategoryService" ref="bdMaterialcategoryServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.bd.service.BdMaterialService" ref="bdMaterialServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.bd.service.BdCustService" ref="bdCustServiceImpl" timeout="300000"/>
+  
+ 	<dubbo:service interface="com.lander.manager.pr.service.PrOrderService" ref="prOrderServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.pr.service.PrOrderitemService" ref="prOrderitemServiceImpl" timeout="300000"/>
+ 	 
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhReceiveService" ref="whReceiveServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhReceivedetailService" ref="whReceivedetailServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhOtherinService" ref="whOtherinServiceImpl" timeout="300000"/>	
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhOtherindetailService" ref="whOtherindetailServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhOtheroutService" ref="whOtheroutServiceImpl" timeout="300000"/>	
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhOtheroutdetailService" ref="whOtheroutdetailServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhPickingService" ref="whPickingServiceImpl" timeout="300000"/>	
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhPickingdetailService" ref="whPickingdetailServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhTransferService" ref="whTransferServiceImpl" timeout="300000"/>	
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhTransferdetailService" ref="whTransferdetailServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhTransferoutService" ref="whTransferoutServiceImpl" timeout="300000"/>	
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhTransferoutdetailService" ref="whTransferoutdetailServiceImpl" timeout="300000"/>
+  	<dubbo:service interface="com.lander.manager.wh.service.WhTransferinService" ref="whTransferinServiceImpl" timeout="300000"/>	
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhTransferindetailService" ref="whTransferindetailServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhSaleService" ref="whSaleServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhSaledetailService" ref="whSaledetailServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhCheckService" ref="whCheckServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhCheckdetailService" ref="whCheckdetailServiceImpl" timeout="300000"/>
+  	 	
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhPeriodService" ref="whPeriodServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.wh.service.WhMaterialinventoryService" ref="whMaterialinventoryServiceImpl" timeout="300000"/>
+ 
+  	<dubbo:service interface="com.lander.manager.sale.service.SaleOrderService" ref="saleOrderServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.sale.service.SaleOrderitemService" ref="saleOrderitemServiceImpl" timeout="300000"/>
+ 		
+ 	<dubbo:service interface="com.lander.manager.rpt.service.RptWhStockService" ref="rptWhStockServiceImpl" timeout="300000"/>
+ 	<dubbo:service interface="com.lander.manager.rpt.service.RptWhStockInvService" ref="rptWhStockInvServiceImpl" timeout="300000"/>
+ 	
+</beans>

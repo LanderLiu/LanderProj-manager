@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.sys.dao.TSysControlleractionDao" >
+  <resultMap id="BaseResultMap" type="com.lander.sys.pojo.TSysControlleraction" >
+    <id column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="fparentid" property="fparentid" jdbcType="INTEGER" />
+    <result column="fcaption" property="fcaption" jdbcType="VARCHAR" />
+    <result column="fcontroller" property="fcontroller" jdbcType="VARCHAR" />
+    <result column="faction" property="faction" jdbcType="VARCHAR" />
+    <result column="fisenable" property="fisenable" jdbcType="BIT" />
+    <result column="fmemo" property="fmemo" jdbcType="VARCHAR" />
+    <result column="fisfree" property="fisfree" jdbcType="BIT" />
+    <result column="findex" property="findex" jdbcType="INTEGER" />
+    <result column="fisparent" property="fisparent" jdbcType="BIT" />
+    <result column="fitemtypeid" property="fitemtypeid" jdbcType="TINYINT" />
+    <result column="fcreatedatetime" property="fcreatedatetime" jdbcType="TIMESTAMP" />
+    <result column="fcreateman" property="fcreateman" jdbcType="VARCHAR" />
+    <result column="flastmodifydatetime" property="flastmodifydatetime" jdbcType="TIMESTAMP" />
+    <result column="flastmodifyman" property="flastmodifyman" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      fid, fparentid, fcaption, fcontroller, faction, fisenable, fmemo, fisfree, findex, 
+      fisparent, fitemtypeid, fcreatedatetime, fcreateman, flastmodifydatetime, flastmodifyman
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lander.sys.pojo.TSysControlleractionQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sys_controlleraction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    fid,fparentid,fcaption,fcontroller,faction,fisenable,fmemo,fisfree,findex,fisparent,fitemtypeid,fcreatedatetime,fcreateman,flastmodifydatetime,flastmodifyman
+    from t_sys_controlleraction
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_sys_controlleraction
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lander.sys.pojo.TSysControlleractionQuery" >
+    delete from t_sys_controlleraction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lander.sys.pojo.TSysControlleraction" >
+    insert into t_sys_controlleraction (fid, fparentid, fcaption, 
+      fcontroller, faction, fisenable, 
+      fmemo, fisfree, findex, 
+      fisparent, fitemtypeid, fcreatedatetime, 
+      fcreateman, flastmodifydatetime, flastmodifyman
+      )
+    values (#{fid,jdbcType=INTEGER}, #{fparentid,jdbcType=INTEGER}, #{fcaption,jdbcType=VARCHAR}, 
+      #{fcontroller,jdbcType=VARCHAR}, #{faction,jdbcType=VARCHAR}, #{fisenable,jdbcType=BIT}, 
+      #{fmemo,jdbcType=VARCHAR}, #{fisfree,jdbcType=BIT}, #{findex,jdbcType=INTEGER}, 
+      #{fisparent,jdbcType=BIT}, #{fitemtypeid,jdbcType=TINYINT}, #{fcreatedatetime,jdbcType=TIMESTAMP}, 
+      #{fcreateman,jdbcType=VARCHAR}, #{flastmodifydatetime,jdbcType=TIMESTAMP}, #{flastmodifyman,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lander.sys.pojo.TSysControlleraction" >
+    insert into t_sys_controlleraction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fparentid != null" >
+        fparentid,
+      </if>
+      <if test="fcaption != null" >
+        fcaption,
+      </if>
+      <if test="fcontroller != null" >
+        fcontroller,
+      </if>
+      <if test="faction != null" >
+        faction,
+      </if>
+      <if test="fisenable != null" >
+        fisenable,
+      </if>
+      <if test="fmemo != null" >
+        fmemo,
+      </if>
+      <if test="fisfree != null" >
+        fisfree,
+      </if>
+      <if test="findex != null" >
+        findex,
+      </if>
+      <if test="fisparent != null" >
+        fisparent,
+      </if>
+      <if test="fitemtypeid != null" >
+        fitemtypeid,
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime,
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman,
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime,
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fparentid != null" >
+        #{fparentid,jdbcType=INTEGER},
+      </if>
+      <if test="fcaption != null" >
+        #{fcaption,jdbcType=VARCHAR},
+      </if>
+      <if test="fcontroller != null" >
+        #{fcontroller,jdbcType=VARCHAR},
+      </if>
+      <if test="faction != null" >
+        #{faction,jdbcType=VARCHAR},
+      </if>
+      <if test="fisenable != null" >
+        #{fisenable,jdbcType=BIT},
+      </if>
+      <if test="fmemo != null" >
+        #{fmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="fisfree != null" >
+        #{fisfree,jdbcType=BIT},
+      </if>
+      <if test="findex != null" >
+        #{findex,jdbcType=INTEGER},
+      </if>
+      <if test="fisparent != null" >
+        #{fisparent,jdbcType=BIT},
+      </if>
+      <if test="fitemtypeid != null" >
+        #{fitemtypeid,jdbcType=TINYINT},
+      </if>
+      <if test="fcreatedatetime != null" >
+        #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lander.sys.pojo.TSysControlleractionQuery" resultType="java.lang.Integer" >
+    select count(*) from t_sys_controlleraction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_sys_controlleraction
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fparentid != null" >
+        fparentid = #{record.fparentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcaption != null" >
+        fcaption = #{record.fcaption,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcontroller != null" >
+        fcontroller = #{record.fcontroller,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faction != null" >
+        faction = #{record.faction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fisenable != null" >
+        fisenable = #{record.fisenable,jdbcType=BIT},
+      </if>
+      <if test="record.fmemo != null" >
+        fmemo = #{record.fmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fisfree != null" >
+        fisfree = #{record.fisfree,jdbcType=BIT},
+      </if>
+      <if test="record.findex != null" >
+        findex = #{record.findex,jdbcType=INTEGER},
+      </if>
+      <if test="record.fisparent != null" >
+        fisparent = #{record.fisparent,jdbcType=BIT},
+      </if>
+      <if test="record.fitemtypeid != null" >
+        fitemtypeid = #{record.fitemtypeid,jdbcType=TINYINT},
+      </if>
+      <if test="record.fcreatedatetime != null" >
+        fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreateman != null" >
+        fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flastmodifydatetime != null" >
+        flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flastmodifyman != null" >
+        flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_sys_controlleraction
+    set fid = #{record.fid,jdbcType=INTEGER},
+      fparentid = #{record.fparentid,jdbcType=INTEGER},
+      fcaption = #{record.fcaption,jdbcType=VARCHAR},
+      fcontroller = #{record.fcontroller,jdbcType=VARCHAR},
+      faction = #{record.faction,jdbcType=VARCHAR},
+      fisenable = #{record.fisenable,jdbcType=BIT},
+      fmemo = #{record.fmemo,jdbcType=VARCHAR},
+      fisfree = #{record.fisfree,jdbcType=BIT},
+      findex = #{record.findex,jdbcType=INTEGER},
+      fisparent = #{record.fisparent,jdbcType=BIT},
+      fitemtypeid = #{record.fitemtypeid,jdbcType=TINYINT},
+      fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lander.sys.pojo.TSysControlleraction" >
+    update t_sys_controlleraction
+    <set >
+      <if test="fparentid != null" >
+        fparentid = #{fparentid,jdbcType=INTEGER},
+      </if>
+      <if test="fcaption != null" >
+        fcaption = #{fcaption,jdbcType=VARCHAR},
+      </if>
+      <if test="fcontroller != null" >
+        fcontroller = #{fcontroller,jdbcType=VARCHAR},
+      </if>
+      <if test="faction != null" >
+        faction = #{faction,jdbcType=VARCHAR},
+      </if>
+      <if test="fisenable != null" >
+        fisenable = #{fisenable,jdbcType=BIT},
+      </if>
+      <if test="fmemo != null" >
+        fmemo = #{fmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="fisfree != null" >
+        fisfree = #{fisfree,jdbcType=BIT},
+      </if>
+      <if test="findex != null" >
+        findex = #{findex,jdbcType=INTEGER},
+      </if>
+      <if test="fisparent != null" >
+        fisparent = #{fisparent,jdbcType=BIT},
+      </if>
+      <if test="fitemtypeid != null" >
+        fitemtypeid = #{fitemtypeid,jdbcType=TINYINT},
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lander.sys.pojo.TSysControlleraction" >
+    update t_sys_controlleraction
+    set fparentid = #{fparentid,jdbcType=INTEGER},
+      fcaption = #{fcaption,jdbcType=VARCHAR},
+      fcontroller = #{fcontroller,jdbcType=VARCHAR},
+      faction = #{faction,jdbcType=VARCHAR},
+      fisenable = #{fisenable,jdbcType=BIT},
+      fmemo = #{fmemo,jdbcType=VARCHAR},
+      fisfree = #{fisfree,jdbcType=BIT},
+      findex = #{findex,jdbcType=INTEGER},
+      fisparent = #{fisparent,jdbcType=BIT},
+      fitemtypeid = #{fitemtypeid,jdbcType=TINYINT},
+      fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

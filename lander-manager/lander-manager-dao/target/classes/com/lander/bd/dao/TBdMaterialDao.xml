@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lander.bd.dao.TBdMaterialDao" >
+  <resultMap id="BaseResultMap" type="com.lander.bd.pojo.TBdMaterial" >
+    <id column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fcreatedatetime" property="fcreatedatetime" jdbcType="TIMESTAMP" />
+    <result column="fcreateman" property="fcreateman" jdbcType="VARCHAR" />
+    <result column="flastmodifydatetime" property="flastmodifydatetime" jdbcType="TIMESTAMP" />
+    <result column="flastmodifyman" property="flastmodifyman" jdbcType="VARCHAR" />
+    <result column="fstateid" property="fstateid" jdbcType="INTEGER" />
+    <result column="fnumber" property="fnumber" jdbcType="VARCHAR" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+    <result column="fcategoryid" property="fcategoryid" jdbcType="BIGINT" />
+    <result column="fspecification" property="fspecification" jdbcType="VARCHAR" />
+    <result column="funit" property="funit" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      fid, fcreatedatetime, fcreateman, flastmodifydatetime, flastmodifyman, fstateid, 
+      fnumber, fname, fcategoryid, fspecification, funit
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lander.bd.pojo.TBdMaterialQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_bd_material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    fid,fcreatedatetime,fcreateman,flastmodifydatetime,flastmodifyman,fstateid,fnumber,fname,fcategoryid,fspecification,funit
+    from t_bd_material
+    where fid = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_bd_material
+    where fid = #{fid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lander.bd.pojo.TBdMaterialQuery" >
+    delete from t_bd_material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lander.bd.pojo.TBdMaterial" >
+    insert into t_bd_material (fid, fcreatedatetime, fcreateman, 
+      flastmodifydatetime, flastmodifyman, 
+      fstateid, fnumber, fname, 
+      fcategoryid, fspecification, funit
+      )
+    values (#{fid,jdbcType=BIGINT}, #{fcreatedatetime,jdbcType=TIMESTAMP}, #{fcreateman,jdbcType=VARCHAR}, 
+      #{flastmodifydatetime,jdbcType=TIMESTAMP}, #{flastmodifyman,jdbcType=VARCHAR}, 
+      #{fstateid,jdbcType=INTEGER}, #{fnumber,jdbcType=VARCHAR}, #{fname,jdbcType=VARCHAR}, 
+      #{fcategoryid,jdbcType=BIGINT}, #{fspecification,jdbcType=VARCHAR}, #{funit,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lander.bd.pojo.TBdMaterial" >
+    insert into t_bd_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime,
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman,
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime,
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman,
+      </if>
+      <if test="fstateid != null" >
+        fstateid,
+      </if>
+      <if test="fnumber != null" >
+        fnumber,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+      <if test="fcategoryid != null" >
+        fcategoryid,
+      </if>
+      <if test="fspecification != null" >
+        fspecification,
+      </if>
+      <if test="funit != null" >
+        funit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fcreatedatetime != null" >
+        #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="fstateid != null" >
+        #{fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="fnumber != null" >
+        #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fcategoryid != null" >
+        #{fcategoryid,jdbcType=BIGINT},
+      </if>
+      <if test="fspecification != null" >
+        #{fspecification,jdbcType=VARCHAR},
+      </if>
+      <if test="funit != null" >
+        #{funit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lander.bd.pojo.TBdMaterialQuery" resultType="java.lang.Integer" >
+    select count(*) from t_bd_material
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_bd_material
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fcreatedatetime != null" >
+        fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreateman != null" >
+        fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flastmodifydatetime != null" >
+        flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flastmodifyman != null" >
+        flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fstateid != null" >
+        fstateid = #{record.fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fnumber != null" >
+        fnumber = #{record.fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fname != null" >
+        fname = #{record.fname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcategoryid != null" >
+        fcategoryid = #{record.fcategoryid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fspecification != null" >
+        fspecification = #{record.fspecification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.funit != null" >
+        funit = #{record.funit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_bd_material
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fcreatedatetime = #{record.fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{record.fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{record.flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{record.flastmodifyman,jdbcType=VARCHAR},
+      fstateid = #{record.fstateid,jdbcType=INTEGER},
+      fnumber = #{record.fnumber,jdbcType=VARCHAR},
+      fname = #{record.fname,jdbcType=VARCHAR},
+      fcategoryid = #{record.fcategoryid,jdbcType=BIGINT},
+      fspecification = #{record.fspecification,jdbcType=VARCHAR},
+      funit = #{record.funit,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lander.bd.pojo.TBdMaterial" >
+    update t_bd_material
+    <set >
+      <if test="fcreatedatetime != null" >
+        fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreateman != null" >
+        fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      </if>
+      <if test="flastmodifydatetime != null" >
+        flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flastmodifyman != null" >
+        flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="fstateid != null" >
+        fstateid = #{fstateid,jdbcType=INTEGER},
+      </if>
+      <if test="fnumber != null" >
+        fnumber = #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null" >
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fcategoryid != null" >
+        fcategoryid = #{fcategoryid,jdbcType=BIGINT},
+      </if>
+      <if test="fspecification != null" >
+        fspecification = #{fspecification,jdbcType=VARCHAR},
+      </if>
+      <if test="funit != null" >
+        funit = #{funit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lander.bd.pojo.TBdMaterial" >
+    update t_bd_material
+    set fcreatedatetime = #{fcreatedatetime,jdbcType=TIMESTAMP},
+      fcreateman = #{fcreateman,jdbcType=VARCHAR},
+      flastmodifydatetime = #{flastmodifydatetime,jdbcType=TIMESTAMP},
+      flastmodifyman = #{flastmodifyman,jdbcType=VARCHAR},
+      fstateid = #{fstateid,jdbcType=INTEGER},
+      fnumber = #{fnumber,jdbcType=VARCHAR},
+      fname = #{fname,jdbcType=VARCHAR},
+      fcategoryid = #{fcategoryid,jdbcType=BIGINT},
+      fspecification = #{fspecification,jdbcType=VARCHAR},
+      funit = #{funit,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>
